@@ -259,6 +259,23 @@ export default function Header() {
                           <span>Admin Dashboard</span>
                         </Link>
                       </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href="/dashboard/orders" className="flex items-center">
+                          <History className="mr-2 h-4 w-4" />
+                          <span>My Order History</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href="/cart" className="flex items-center">
+                          <ShoppingCart className="mr-2 h-4 w-4" />
+                          <span>Shopping Cart</span>
+                          {cartCount > 0 && (
+                            <Badge className="ml-auto" variant="secondary">
+                              {cartCount}
+                            </Badge>
+                          )}
+                        </Link>
+                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
                     </>
                   )}
@@ -368,14 +385,37 @@ export default function Header() {
                       )}
 
                       {(session.user.role === 'ADMIN' || session.user.role === 'SUPER_ADMIN') && (
-                        <Link
-                          href="/admin"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
-                        >
-                          <Package className="mr-3 h-5 w-5" />
-                          Admin Dashboard
-                        </Link>
+                        <>
+                          <Link
+                            href="/admin"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                          >
+                            <Package className="mr-3 h-5 w-5" />
+                            Admin Dashboard
+                          </Link>
+                          <Link
+                            href="/dashboard/orders"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                          >
+                            <History className="mr-3 h-5 w-5" />
+                            My Order History
+                          </Link>
+                          <Link
+                            href="/cart"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                          >
+                            <ShoppingCart className="mr-3 h-5 w-5" />
+                            Shopping Cart
+                            {cartCount > 0 && (
+                              <Badge className="ml-auto" variant="secondary">
+                                {cartCount}
+                              </Badge>
+                            )}
+                          </Link>
+                        </>
                       )}
 
                       <button
