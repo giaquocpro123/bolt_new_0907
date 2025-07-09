@@ -106,24 +106,37 @@ export default function AdminSidebar() {
           </div>
           <nav className="flex-1 space-y-1 px-2 py-4">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
-                  pathname === item.href
-                    ? 'bg-blue-100 text-blue-900'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                )}
-              >
-                <item.icon
+              {item.disabled ? (
+                <div
+                  key={item.name}
+                  className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-400 cursor-not-allowed opacity-50"
+                >
+                  <item.icon className="mr-3 h-5 w-5 flex-shrink-0 text-gray-400" />
+                  {item.name}
+                  <span className="ml-auto text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">
+                    Soon
+                  </span>
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
                   className={cn(
-                    'mr-3 h-5 w-5 flex-shrink-0',
-                    pathname === item.href ? 'text-blue-500' : 'text-gray-400 group-hover:text-gray-500'
+                    'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
+                    pathname === item.href
+                      ? 'bg-blue-100 text-blue-900'
+                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   )}
-                />
-                {item.name}
-              </Link>
+                >
+                  <item.icon
+                    className={cn(
+                      'mr-3 h-5 w-5 flex-shrink-0',
+                      pathname === item.href ? 'text-blue-500' : 'text-gray-400 group-hover:text-gray-500'
+                    )}
+                  />
+                  {item.name}
+                </Link>
+              )}
             ))}
           </nav>
         </div>
